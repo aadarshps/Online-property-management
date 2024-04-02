@@ -1,0 +1,55 @@
+{% extends 'cuspage.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="card">
+<div class="card">
+
+        <div class="card-header  bg-primary">
+            <strong class="card-title " style="color:white">PROPERTY DETAILS</strong>
+            <form method="get"  action="{% url 'view_property_cus' %}" style="margin-left:900px;display:flex;color:white">
+        {{form}}
+        <button class="btn btn-warning"  type="submit">Search</button>
+      </form>
+        </div>
+        <div class="card-body">
+
+            <table class="table">
+                <thead>
+    <tr>
+        <th scope="col">SI NO</th>
+        <th scope="col">OWNER NAME</th>
+        <th scope="col">PROPERTY TYPE</th>
+        <th scope="col">LOCATION</th>
+        <th scope="col">DESCRIPTION</th>
+        <th scope="col">RENT AMOUNT</th>
+        <th scope="col">DOCUMENT</th>
+        <th scope="col">IMAGE 1</th>
+        <th scope="col">IMAGE 2</th>
+        <th scope="col">IMAGE 3</th>
+    </tr>
+                </thead>
+                <tbody>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.owner_name}}</td>
+        <td>{{i.Property_type}}</td>
+        <td>{{i.Location}}</td>
+        <td>{{i.Description}}</td>
+        <td>{{i.Rent_amount}}</td>
+        <td><a href="{{i.Documents}}" download>Download</a> </td>
+        <td><img src="{{i.Image1.url}}" height="100px"> </td>
+        <td><img src="{{i.Image2.url}}" height="100px"> </td>
+        <td><img src="{{i.Image3.url}}" height="100px"> </td>
+
+
+    </tr>
+    {% endfor %}
+                </tbody>
+</table>
+</div>
+</div>
+</div>
+
+{% endblock %}

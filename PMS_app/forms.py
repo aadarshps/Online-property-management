@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import RegexValidator
 
-from PMS_app.models import User, Customer, Owner, Property, Schedule,CreditCard,Bill
+from PMS_app.models import User, Customer, Owner, Property, Schedule,CreditCard,Bill,Feedback
 
 
 class DateInput(forms.DateInput):
@@ -64,3 +64,10 @@ class PayBillForm(forms.ModelForm):
     class Meta:
         model = CreditCard
         fields = ('card_no', 'card_cvv', 'expiry_date')
+
+class FeedbackForm(forms.ModelForm):
+    date = forms.DateField(widget=DateInput)
+
+    class Meta:
+        model = Feedback
+        fields = ('subject', 'feedback', 'date')

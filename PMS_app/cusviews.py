@@ -1,8 +1,9 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from PMS_app.forms import SearchForm
-from PMS_app.models import Owner, Property, Schedule, Customer, Appointment, Bill, CreditCard
+from PMS_app.forms import SearchForm, FeedbackForm
+from PMS_app.models import Owner, Property, Schedule, Customer, Appointment, Bill, CreditCard, Feedback
 
 
 def own_view(request):
@@ -103,3 +104,22 @@ def bill_history(request):
     bill = Bill.objects.filter(name=u, status__in=[1, 2])
 
     return render(request, 'view_bill_history.html', {'bills': bill})
+
+def Feedback_add_user(request):
+    form = FeedbackForm()
+    u = request.user
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user = u
+            obj.save()
+            messages.info(request, 'Complaint Registered Successfully')
+            return redirect('Feedback_view_user')
+    return render(request, 'complaint_add.html', {'form': form})
+
+
+@login_required(login_url='login_view')
+def Feedback_view_user(request):
+    f = Feedback.objects.filter(user=request.user)
+    return render(request, 'complaint_view.html', {'feedback': f})

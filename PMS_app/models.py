@@ -13,6 +13,7 @@ class Owner(models.Model):
     Phone_No = models.CharField(max_length=10)
     Email_Id = models.EmailField()
     Photo = models.ImageField(upload_to='photo')
+    Id_Card = models.FileField(upload_to='id')
     approval_status = models.BooleanField(default=False)
 
     def __str__(self):
@@ -25,6 +26,7 @@ class Customer(models.Model):
     Phone_Number = models.CharField(max_length=10)
     Email_Id = models.EmailField()
     Photo = models.ImageField(upload_to='pic')
+    Id_Card = models.FileField(upload_to='Id')
     approval_status = models.BooleanField(default=0)
 
     def __str__(self):
@@ -77,6 +79,13 @@ class CreditCard(models.Model):
     card_no = models.CharField(max_length=30)
     card_cvv = models.CharField(max_length=30)
     expiry_date = models.CharField(max_length=200)
+
+class Feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    subject = models.CharField(max_length=200)
+    feedback = models.TextField()
+    date = models.DateField()
+    reply = models.TextField(null=True, blank=True)
 
 
 

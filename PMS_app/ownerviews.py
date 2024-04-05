@@ -1,9 +1,10 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import redirect, render
 
 from PMS_app.forms import PropertyForm, SchdeuleForm
-from PMS_app.models import Owner, Property, Customer, Schedule, Appointment, Bill
+from PMS_app.models import Owner, Property, Customer, Schedule, Appointment, Bill, Feedback
 
 
 def property_add(request):
@@ -120,3 +121,7 @@ def view_bill_owner(request):
     bill = Bill.objects.all()
     print(bill)
     return render(request, 'view_bill_owner.html', {'bills': bill})
+
+
+
+

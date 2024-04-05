@@ -25,6 +25,8 @@ urlpatterns=[
     path('appointment_adminss',adminviews.appointment_adminss,name='appointment_adminss'),
     path('generate_bill',adminviews.generate_bill,name='generate_bill'),
     path('view_payment_details',adminviews.view_payment_details,name='view_payment_details'),
+    path('Feedback_admin',adminviews.Feedback_admin,name='Feedback_admin'),
+    path('reply_Feedback/<int:id>/',adminviews.reply_Feedback,name='reply_Feedback'),
 
 
     path('own_view',cusviews.own_view,name='own_view'),
@@ -36,6 +38,8 @@ urlpatterns=[
     path('pay_bill/<int:id>/',cusviews.pay_bill,name='pay_bill'),
     path('pay_in_direct/<int:id>/',cusviews.pay_in_direct,name='pay_in_direct'),
     path('bill_history',cusviews.bill_history,name='bill_history'),
+    path('Feedback_add_user', cusviews.Feedback_add_user, name='Feedback_add_user'),
+    path('Feedback_view_user', cusviews.Feedback_view_user, name='Feedback_view_user'),
 
 
     path('property_add',ownerviews.property_add,name='property_add'),
@@ -51,4 +55,6 @@ urlpatterns=[
     path('approve_appointment/<int:id>/', ownerviews.approve_appointment, name='approve_appointment'),
     path('reject_appointment/<int:id>/', ownerviews.reject_appointment, name='reject_appointment'),
     path('view_bill_owner', ownerviews.view_bill_owner, name='view_bill_owner'),
+
+
 ]

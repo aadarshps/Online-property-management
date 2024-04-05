@@ -1,8 +1,9 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from PMS_app.forms import AddBill
-from PMS_app.models import Customer, Owner, Property, Appointment, Bill
+from PMS_app.models import Customer, Owner, Property, Appointment, Bill, Feedback
 
 
 def view_cus(request):
@@ -75,6 +76,22 @@ def view_payment_details(request):
     bill = Bill.objects.all()
     print(bill)
     return render(request, 'view_payment_details.html', {'bills': bill})
+
+def Feedback_admin(request):
+    f = Feedback.objects.all()
+    return render(request, 'Feedback_admin.html', {'feedback': f})
+
+
+@login_required(login_url='login_view')
+def reply_Feedback(request, id):
+    f = Feedback.objects.get(id=id)
+    if request.method == 'POST':
+        r = request.POST.get('reply')
+        f.reply = r
+        f.save()
+        messages.info(request, 'Reply send for complaint')
+        return redirect('Feedback_admin')
+    return render(request, 'reply_Feedback.html', {'feedback': f})
 
 
 

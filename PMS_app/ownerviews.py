@@ -49,9 +49,9 @@ def cus_view_ow(request):
 
 
 def schedule_add(request):
-    form = SchdeuleForm()
+    form = SchdeuleForm(user=request.user)
     if request.method == 'POST':
-        form = SchdeuleForm(request.POST)
+        form = SchdeuleForm(request.POST,user=request.user)
         if form.is_valid():
             form=form.save(commit=False)
             form.owner = Owner.objects.get(user=request.user)

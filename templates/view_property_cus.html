@@ -36,7 +36,14 @@
         <td>{{i.owner_name}}</td>
         <td>{{i.Property_type}}</td>
         <td>{{i.Location}}</td>
-        <td>{{i.Description}}</td>
+        <td>
+                        {% if i.Description|length <= 100 %}
+                        {{ i.Description }}
+                        {% else %}
+                        {{ i.Description|slice:":60" }}... <a class="read-more-btn" style="color:blue">Read more</a>
+                        <span class="full-description" style="display: none;">{{ i.Description }}</span>
+                        {% endif %}
+                    </td>
         <td>{{i.Rent_amount}}</td>
         <td><a href="{{i.Documents}}" download>Download</a> </td>
         <td><img src="{{i.Image1.url}}" height="100px"> </td>
@@ -51,5 +58,13 @@
 </div>
 </div>
 </div>
-
+<script>
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const description = this.nextElementSibling;
+            description.style.display = 'inline';
+            this.style.display = 'none';
+        });
+    });
+</script>
 {% endblock %}

@@ -14,6 +14,7 @@
                           <th>DATE</th>
                           <th>STARTING TIME</th>
                           <th>ENDING TIME</th>
+                          <th>PROPERTY</th>
                           <th>Appointment</th>
                         </tr>
                       </thead>
@@ -25,6 +26,7 @@
                           <td>{{ a.schedule.date }}</td>
                           <td>{{ a.schedule.start_time }}</td>
                           <td>{{ a.schedule.end_time }}</td>
+                          <td>{{ a.schedule.property }}</td>
                           <td>
                               {% if a.status == 0 %}
                         <a type="button" class="btn btn-success" href="{% url 'approve_appointment' a.id %}">Approve</a>

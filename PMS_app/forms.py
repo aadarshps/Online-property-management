@@ -40,12 +40,18 @@ class SearchForm(forms.Form):
 
 class SchdeuleForm(forms.ModelForm):
     date = forms.DateField(widget=DateInput)
-    start_time = forms.TimeField(widget=TimeInput, )
-    end_time = forms.TimeField(widget=TimeInput, )
+    start_time = forms.TimeField(widget=TimeInput)
+    end_time = forms.TimeField(widget=TimeInput)
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(SchdeuleForm, self).__init__(*args, **kwargs)
+        if user:
+            self.fields['property'].queryset = Property.objects.filter(owner_name__user=user)
 
     class Meta:
         model = Schedule
-        fields = ('date', 'start_time', 'end_time')
+        fields = ('date', 'start_time', 'end_time', 'property')
 
 class AddBill(forms.ModelForm):
     # name = forms.ModelChoiceField(queryset=Customers.objects.filter(role='customer'))

@@ -14,6 +14,7 @@
                           <th>DATE</th>
                           <th>STARTING TIME</th>
                           <th>ENDING TIME</th>
+                          <th>PROPERTY</th>
                           <th>Appointment</th>
                         </tr>
                       </thead>
@@ -25,6 +26,7 @@
                           <td>{{ s.date }}</td>
                           <td>{{ s.start_time }}</td>
                           <td>{{ s.end_time }}</td>
+                          <td>{{ s.property }}</td>
                           <td>
                             <a href="{% url 'take_appointment' s.id %}">
                             <button type="button" class="btn btn-primary">Book Appointment</button>
